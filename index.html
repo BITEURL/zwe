@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>BITEURL</title>
+  </head>
+  <body style="background-color: #f0f0f0;">
+    <h1 style="text-align: center;">BITEURL</h1>
+    <p style="text-align: center;">Enter the URL of the video you want to download:</p>
+    <form action="download.php" method="post" style="margin: auto;">
+      <input type="text" name="video_url" placeholder="Video URL">
+      <br>
+      <label for="website_name" style="text-align: center;">Website Name:</label><br>
+      <input type="text" id="website_name" name="website_name" style="margin: auto;"><br>
+      <input type="submit" value="Download">
+    </form>
+  </body>
+</html>
+<html>
+  <head>
+    <title>Moving Image Background</title>
+  </head>
+  <body>
+    <video src="path/to/video.mp4" autoplay loop style="object-fit: cover; width: 100%; height: 100%;"></video>
+  </body>
+</html>
+<html>
+  <head>
+    <title>Video Downloader</title>
+    <script>
+      //   function downloadVideo() {
+      // Show the progress bar
+      document.getElementById("progress-bar-container").style.display = "block";
+
+// Get the video URL from the form
+var videoURL = document.getElementById("download-form").elements.video_url.value;
+
+// Send a request to the server to download the video
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "download.php", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.onload = function () {
+  if (this.status == 200) {
+    // The video has been downloaded successfully
+    alert("Video downloaded successfully!");
+    // Hide the progress bar
+    document.getElementById("progress-bar-container").style.display = "none";
+  } else {
+    // There was an error downloading the video
+    alert("Error downloading video: " + this.statusText);
+  }
+};
+xhr.onerror = function () {
+  // There was an error connecting to the server
+  alert("Error connecting to server: " + this.statusText);
+};
+xhr.upload.onprogress = function (event) {
+  // Update the progress bar with the current progress
+  var percentComplete = (event.loaded / event.total) * 100;
+  document.getElementById("progress-bar").style.width = percentComplete + "%";
+};
+xhr.send("video_url=" + encodeURIComponent(videoURL));
+</script>
+</html>
+    </script>
+  </head>
+  <body>
+    <html>
+        <head>
+          <title>Video Downloader</title>
+        </head>
+        <body style="background-color: #f0f0f0;">
+          <h1 style="text-align: center;">Video Downloader</h1>
+          <p>Enter the URL of the video you want to download:</p>
+          <form id="download-form" action="download.php" method="post">
+            <input type="text" name="video_url" placeholder="Video URL">
+            <input type="submit" value="Download" onclick="downloadVideo()">
+          </form>
+          <div id="progress-bar-container" style="display: none;">
+            <p>Downloading...</p>
+            <div id="progress-bar"></div>
+          </div>
+        </body>
+        <script>
